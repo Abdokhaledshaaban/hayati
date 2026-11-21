@@ -157,6 +157,7 @@ document.addEventListener('click',e=>{if(e.target.closest('.pop'))$('.menu').ope
  else if(a=='clr'){const g=S.tasks.filter(x=>x.done);if(!g.length)return toast('مفيش مهام خلصانة');S.tasks=S.tasks.filter(x=>!x.done);toast('اتمسح '+g.length+' مهمة',()=>S.tasks.push(...g))}
  else if(a=='notif'){toggleNotif();return}
  else if(a=='donenow'){const dn=doneOf(now().day);dn[D.id]=!dn[D.id]}
+ else if(a=='install'){if(DP){DP.prompt();DP.userChoice.finally(()=>{DP=null;$('#inst').hidden=true})}else alert('على الأيفون: اضغط زر المشاركة في سفاري ثم «إضافة إلى الشاشة الرئيسية».');return}
  else if(a=='edit')editing=!editing;
  else if(a=='add'){const l=sorted(day).slice(-1)[0];S.sched[day].push({id:'n'+uid(),a:l?l.b:'08:00',b:l?l.b:'08:30',t:'rest',n:'نشاط جديد',d:''})}
  else if(a=='reset'){if(!confirm('هترجع الجدول الأصلي وكل تعديلاتك على الجدول هتتمسح. متأكد؟'))return;S.sched=DEF()}
@@ -182,6 +183,10 @@ setInterval(()=>{const n=now();if(S.notif&&n.min>=lastMin)sorted(n.day).forEach(
 setInterval(()=>{if(!POM.run)return;POM.left--;document.title=pf()+' • حياتي';if(POM.left<=0){POM.run=false;if(POM.mode>=25){S.pom[today()]=(S.pom[today()]||0)+1;save()}toast(POM.mode>=25?'🎉 خلصت جلسة تركيز — خد استراحة':'☕ الاستراحة خلصت');ping('حياتي','انتهى الوقت');POM.left=POM.mode*60;document.title='حياتي';render()}else{const e=$('#pomt');if(e)e.textContent=pf()}},1000);
 async function toggleNotif(){if(S.notif){S.notif=false;save();return toast('اتقفلت التنبيهات')}if(!window.Notification)return toast('المتصفح مش بيدعم التنبيهات');S.notif=(await Notification.requestPermission())=='granted';save();toast(S.notif?'🔔 التنبيهات شغالة (والموقع مفتوح)':'التنبيهات مش مسموحة من المتصفح')}
 document.addEventListener('keydown',e=>{if(e.ctrlKey||e.metaKey||e.altKey||e.target.closest('input,textarea,select'))return;const i='1234'.indexOf(e.key);if(i>=0)location.hash=PAGES[i][0];else if(e.key=='n'||e.key=='N'){e.preventDefault();location.hash='tasks';setTimeout(()=>$('#tt')?.focus(),60)}else if(e.key=='t'||e.key=='T')document.querySelector('[data-act=theme]').click()});
+let DP=null;
+addEventListener('beforeinstallprompt',e=>{e.preventDefault();DP=e;$('#inst').hidden=false});
+addEventListener('appinstalled',()=>{DP=null;$('#inst').hidden=true;toast('اتثبّت التطبيق ✅')});
+if(/iphone|ipad/i.test(navigator.userAgent)&&!navigator.standalone)$('#inst').hidden=false;
 applyPrefs();document.documentElement.dataset.theme=S.theme||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
 render();
 

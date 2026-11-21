@@ -127,3 +127,5 @@ main{padding:16px 14px 110px}.top{backdrop-filter:none;background:var(--bg);padd
 #toast{bottom:88px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 @media print{.top,.days,.f,.tools,button,#nav{display:none!important}body{background:#fff}.row{break-inside:avoid;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+
+.mi[hidden]{display:none}
