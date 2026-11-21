@@ -7,7 +7,7 @@
 [data-theme=dark]{--bg:hsl(228 30% 9%);--surf:hsl(228 26% 14%);--ink:hsl(228 30% 94%);--mut:hsl(228 14% 66%);--line:hsl(228 22% 22%);--acc:hsl(var(--h) 90% 74%);--on:hsl(228 40% 10%);
 --code:hsl(215 85% 68%);--study:hsl(265 80% 74%);--lesson:hsl(150 55% 56%);--kuttab:hsl(176 55% 54%);--gym:hsl(20 92% 64%);--sleep:hsl(238 60% 74%);--rest:hsl(220 16% 66%);--transport:hsl(220 12% 58%);--meal:hsl(38 92% 60%);--wake:hsl(197 85% 62%);--prayer:hsl(160 55% 56%);
 --high:hsl(2 88% 68%);--medium:hsl(36 92% 60%);--low:hsl(150 55% 56%);--sh:0 1px 2px #0006;color-scheme:dark}
-*{box-sizing:border-box}
+*{box-sizing:border-box; overflowx: hidden}
 html{font-size:calc(var(--fs)*1px);scroll-padding-top:76px}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 1rem/1.7 Cairo,'Noto Sans Arabic',Tahoma,sans-serif;-webkit-font-smoothing:antialiased}
 button,input,select,textarea{font:inherit;color:inherit}
